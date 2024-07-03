@@ -7,6 +7,6 @@ public class CurrencyDBContext : DbContext
     public CurrencyDBContext(DbContextOptions options) : base(options)
     {
     }
-    public DbSet<Currency> Currency { get; set; }
+    public DbSet<Currency> Currencies { get; set; }
     public DbSet<Translation> Translation { get; set; }
 }

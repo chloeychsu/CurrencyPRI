@@ -36,6 +36,6 @@ CurrencyPRI 專案使用 ASP.NET Core 8.0 建置.呼叫 Coindesk API 取得相�
     ```bash
     cd CurrencyApi
     dotnet ef migrations add "InitialCreate" -o Data/Migrations
-    dotnet ef database update
+    dotnet watch
     ```
 4. 

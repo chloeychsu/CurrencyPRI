@@ -20,7 +20,7 @@ public class CoindeskApiHttpClient
             Code = x.Value.code,
             Name = x.Value.description,
             Rate = x.Value.rate_float,
-            UpdatedISO = response.time.updatedISO
+            UpdatedUTC = response.time.updatedISO.ToUniversalTime(),
         }).ToList();
         return item;
     }
