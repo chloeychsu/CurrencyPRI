@@ -14,6 +14,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CurrencyDBContext>(opt=>{
     opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"));
 });
+// DI
+builder.Services.AddHttpClient<CoindeskApiHttpClient>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
@@ -30,4 +33,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+try
+{
+    await DbInitializer.InitDb(app);
+}
+catch (Exception e)
+{
+    Console.WriteLine(e);
+}
+
+await app.RunAsync();

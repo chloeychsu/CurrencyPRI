@@ -16,4 +16,6 @@ public class Currency
     [Required]
     [Column(TypeName = "decimal(18, 2)")]
     public decimal Rate { get; set; }
+    [Required]
+    public DateTime UpdatedISO { get; set; } = DateTime.UtcNow;
 }
