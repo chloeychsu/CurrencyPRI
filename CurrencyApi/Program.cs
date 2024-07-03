@@ -1,3 +1,6 @@
+using CurrencyApi;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// DB Connection
+builder.Services.AddDbContext<CurrencyDBContext>(opt=>{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"));
+});
 
 var app = builder.Build();
 

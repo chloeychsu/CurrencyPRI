@@ -1,14 +1,16 @@
 services:
   sqlserver:
+    platform: linux/amd64
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sqlserver
     environment:
-      SA_OASSWORD: "ua2SK7d5W7hG2wPc"
+      SA_PASSWORD: "ua2SK7d5W7hG2wPc"
       ACCEPT_EULA: "Y"
     ports:
-      - "1433:1433"
+      - "1455:1433"
     volumes:
       - sqlserverdata:/var/opt/mssql
 
 volumes:
   sqlserverdata:
+
