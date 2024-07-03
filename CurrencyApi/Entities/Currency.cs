@@ -1,9 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace CurrencyApi;
 
-[Table("tbl_Currency")]
+[Table("tbl_Currencies")]
+[PrimaryKey(nameof(CurrencyId))]
+[Index(nameof(Code))]
+
 public class Currency
 {
     public Guid CurrencyId { get; set; } = Guid.NewGuid();
@@ -17,5 +21,6 @@ public class Currency
     [Column(TypeName = "decimal(18, 2)")]
     public decimal Rate { get; set; }
     [Required]
-    public DateTime UpdatedISO { get; set; } = DateTime.UtcNow;
+    public DateTime UpdatedUTC { get; set; } = DateTime.UtcNow;
+    public ICollection<Translation> Language { get; set; } = new List<Translation>();
 }

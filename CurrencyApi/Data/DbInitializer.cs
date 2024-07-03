@@ -14,7 +14,7 @@ public class DbInitializer
     public static async Task SeedData(CurrencyDBContext context, CoindeskApiHttpClient httpClient)
     {
         await context.Database.MigrateAsync();
-        if (context.Currency.Any())
+        if (context.Currencies.Any())
         {
             Console.WriteLine("Currency data already exist");
         }
@@ -34,7 +34,7 @@ public class DbInitializer
         }
         else
         {
-            if (!context.Currency.Any())
+            if (!context.Currencies.Any())
             {
                 Console.WriteLine("Currency is empty");
                 return;
@@ -43,18 +43,15 @@ public class DbInitializer
             var data = new List<Translation>()
             {
                 new Translation{
-                    Table = "tbl_Currency",
-                    RelationId = context.Currency.FirstOrDefault(c => c.Code == "USD").CurrencyId,
+                    CurrencyId = context.Currencies.FirstOrDefault(c => c.Code == "USD").CurrencyId,
                     Language = "zh-TW",
                     Text = "美金"
                 },  new Translation{
-                    Table = "tbl_Currency",
-                    RelationId = context.Currency.FirstOrDefault(c => c.Code == "GBP").CurrencyId,
+                    CurrencyId = context.Currencies.FirstOrDefault(c => c.Code == "GBP").CurrencyId,
                     Language = "zh-TW",
                     Text = "英鎊"
                 },  new Translation{
-                    Table = "tbl_Currency",
-                    RelationId = context.Currency.FirstOrDefault(c => c.Code == "EUR").CurrencyId,
+                    CurrencyId = context.Currencies.FirstOrDefault(c => c.Code == "EUR").CurrencyId,
                     Language = "zh-TW",
                     Text = "歐元"
                 },
