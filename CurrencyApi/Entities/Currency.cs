@@ -7,7 +7,6 @@ namespace CurrencyApi;
 [Table("tbl_Currencies")]
 [PrimaryKey(nameof(CurrencyId))]
 [Index(nameof(Code))]
-
 public class Currency
 {
     public Guid CurrencyId { get; set; } = Guid.NewGuid();

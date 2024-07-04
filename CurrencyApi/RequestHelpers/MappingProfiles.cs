@@ -12,5 +12,6 @@ public class MappingProfiles : Profile
        .ForMember(d => d.CH_Name,
                   o => o.MapFrom(s => s.FirstOrDefault(x => x.Language == "zh-TW").Text ?? ""));
         CreateMap<CreateCurrencyDto,Currency>();
+
     }
 }

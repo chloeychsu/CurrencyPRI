@@ -9,4 +9,5 @@ public class CurrencyDBContext : DbContext
     }
     public DbSet<Currency> Currencies { get; set; }
     public DbSet<Translation> Translation { get; set; }
+    public DbSet<AuditTrail> AuditTrail { get; set; }
 }
