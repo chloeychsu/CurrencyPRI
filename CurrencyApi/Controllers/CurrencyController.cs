@@ -73,7 +73,7 @@ public class CurrencyController : ControllerBase
     [HttpDelete("{code}")]
     public async Task<ActionResult> DeleteCurrency(string code)
     {
-        var currency = await _context.Currencies.FirstAsync(x => x.Code == code);
+        var currency = await _context.Currencies.FirstOrDefaultAsync(x => x.Code == code);
         if (currency == null) return NotFound();
         _context.Currencies.Remove(currency);
         var result = await _context.SaveChangesAsync() > 0;
