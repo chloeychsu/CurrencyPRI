@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CurrencyApi;
 
@@ -20,5 +21,11 @@ public class ServerController : ControllerBase
             throw new NotImplementedException("Exception Test....");
         }
         return Ok();
+    }
+    [HttpGet("GetAllActionTrail")]
+    public async Task<ActionResult<List<AuditTrail>>> GetAllActionTrail()
+    {
+        var query = await _context.AuditTrail.OrderBy(x => x.ReqeustDateUTC).ToListAsync();
+        return query;
     }
 }
