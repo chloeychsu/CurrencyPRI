@@ -10,7 +10,18 @@ services:
       - "1455:1433"
     volumes:
       - sqlserverdata:/var/opt/mssql
-
+  currency-api:
+    image: currency-api:latest
+    build: 
+      context: .
+      dockerfile: CurrencyApi/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__SqlServerConnection=Server=sqlserver;Database=CurrencyDB;User ID=sa;Password=ua2SK7d5W7hG2wPc;Encrypt=True;TrustServerCertificate=True
+    ports:
+      - 5212:80
+    depends_on:
+      - sqlserver
 volumes:
   sqlserverdata:
-
