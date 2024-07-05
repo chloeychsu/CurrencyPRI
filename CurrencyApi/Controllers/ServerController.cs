@@ -18,7 +18,7 @@ public class ServerController : ControllerBase
     {
         if (String.IsNullOrEmpty(null))
         {
-            throw new NotImplementedException("Exception Test....");
+            throw new NotImplementedException("Exception Test.....");
         }
         return Ok();
     }
