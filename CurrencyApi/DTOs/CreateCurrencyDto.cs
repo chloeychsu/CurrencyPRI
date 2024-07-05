@@ -4,12 +4,12 @@ namespace CurrencyApi;
 
 public class CreateCurrencyDto
 {
-    [Required]
+    [Required(ErrorMessage = "Code field is required")]
     public string Code { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Name field is required")]
     public string Name { get; set; }
-    [Required]
+    [Required(ErrorMessage = "CH_Name field is required")]
     public string CH_Name { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Rate field is required")]
     public decimal Rate { get; set; }
 }

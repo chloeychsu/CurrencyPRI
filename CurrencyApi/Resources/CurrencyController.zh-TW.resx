@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Hello" xml:space="preserve">
+    <value>你好</value>
+  </data>
+  <data name="Code field is required" xml:space="preserve">
+    <value>Code 欄位為必填欄位,請輸入此欄位</value>
+  </data>
+  <data name="Name field is required" xml:space="preserve">
+    <value>Name 欄位為必填欄位,請輸入此欄位</value>
+  </data>
+  <data name="CH_Name field is required" xml:space="preserve">
+    <value>CH_Name 欄位為必填欄位,請輸入此欄位</value>
+  </data>
+  <data name="Rate field is required" xml:space="preserve">
+    <value>Rate 欄位為必填欄位,請輸入此欄位</value>
+  </data>
+  <data name="Database update failed" xml:space="preserve">
+    <value>資料庫更新失敗,請檢查您輸入的欄位值.</value>
+  </data>
+  <data name="Invalid Code" xml:space="preserve">
+    <value>無效的 Code 值,請輸入正確的值.</value>
+  </data>
+</root>
