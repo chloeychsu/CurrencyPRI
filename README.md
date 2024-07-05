@@ -11,6 +11,7 @@ CurrencyPRI 專案使用 ASP.NET Core 8.0 建置.呼叫 Coindesk API 取得相�
 - 集成 Swagger-UI 進行 API 文件生成。
 - Repository design pattern 實作。
 - 在 Docker 中運行。
+- UnitTest 單元測試。
 
 
 ## Prerequisites
