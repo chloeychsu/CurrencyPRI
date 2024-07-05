@@ -9,33 +9,32 @@ namespace CurrencyApi;
 [Route("api/currency")]
 public class CurrencyController : ControllerBase
 {
-    private readonly CurrencyDBContext _context;
+    private readonly CurrencyRepository _repo;
     private readonly IMapper _mapper;
     private readonly IStringLocalizer<CurrencyController> _localizer;
 
-    public CurrencyController(CurrencyDBContext context, IMapper mapper, IStringLocalizer<CurrencyController> localizer)
+    public CurrencyController(CurrencyRepository repo, IMapper mapper, IStringLocalizer<CurrencyController> localizer)
     {
-        _context = context;
+        _repo = repo;
         _mapper = mapper;
         _localizer = localizer;
     }
     [HttpGet]
-    public async Task<ActionResult<List<CurrenciesDto>>> GetAllCurrencies()
+    public async Task<ActionResult<List<CurrencyDto>>> GetAllCurrencies()
     {
-        var query = _context.Currencies.OrderBy(x => x.Code).AsQueryable();
-        if (!query.Any()) return NotFound();
-        return await query.ProjectTo<CurrenciesDto>(_mapper.ConfigurationProvider).ToListAsync();
+        return await _repo.GetCurrenciesAsync();
     }
     [HttpGet("{code}")]
-    public async Task<ActionResult<CurrenciesDto>> GetCurrency(string code)
+    public async Task<ActionResult<CurrencyDto>> GetCurrency(string code)
     {
-        if(string.IsNullOrEmpty(code)) return BadRequest(_localizer["Code field is required"].Value);
-        var query = await _context.Currencies.Include(x => x.Language).FirstOrDefaultAsync(x => x.Code == code);
-        if (query == null) return BadRequest(_localizer["Invalid Code"].Value);
-        return _mapper.Map<CurrenciesDto>(query);
+        if (string.IsNullOrEmpty(code))
+            return BadRequest(_localizer["Code field is required"].Value);
+        var query = await _repo.GetCurrencyByCodeAsync(code);
+        if (query == null) return NotFound();
+        return query;
     }
     [HttpPost]
-    public async Task<ActionResult<CurrenciesDto>> CreateCurrency(CreateCurrencyDto newCurrency)
+    public async Task<ActionResult<CurrencyDto>> CreateCurrency(CreateCurrencyDto newCurrency)
     {
         if (!ModelState.IsValid)
         {
@@ -48,23 +47,23 @@ public class CurrencyController : ControllerBase
             Language = "zh-TW",
             Text = newCurrency.CH_Name
         });
-        _context.Currencies.Add(currency);
+        _repo.AddCurrency(currency);
 
-        var result = await _context.SaveChangesAsync() > 0;
+        var result = await _repo.SaveChangesAsync();
         if (!result) return BadRequest(_localizer["Database update failed"].Value);
 
-        return CreatedAtAction(nameof(GetCurrency), new { currency.Code }, _mapper.Map<CurrenciesDto>(currency));
+        return CreatedAtAction(nameof(GetCurrency), new { currency.Code }, _mapper.Map<CurrencyDto>(currency));
     }
 
     [HttpPut("{code}")]
-    public async Task<ActionResult<CurrenciesDto>> UpdateCurrency(string code, UpdateCurrencyDto updateCurrency)
+    public async Task<ActionResult<CurrencyDto>> UpdateCurrency(string code, UpdateCurrencyDto updateCurrency)
     {
-        if(string.IsNullOrEmpty(code.Trim())) return BadRequest(_localizer["Code field is required"].Value);
+        if (string.IsNullOrEmpty(code.Trim())) return BadRequest(_localizer["Code field is required"].Value);
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        var currency = await _context.Currencies.Include(x => x.Language).FirstOrDefaultAsync(x => x.Code == code);
+        var currency = await _repo.GetCurrencyEntityByCode(code);
         if (currency == null) return BadRequest(_localizer["Invalid Code"].Value);
 
         currency.Name = String.IsNullOrEmpty(updateCurrency.Name) ? currency.Name : updateCurrency.Name;
@@ -80,18 +79,18 @@ public class CurrencyController : ControllerBase
             });
         }
 
-        var result = await _context.SaveChangesAsync() > 0;
+        var result = await _repo.SaveChangesAsync();
         if (result) return Ok();
         return BadRequest(_localizer["Database update failed"].Value);
     }
     [HttpDelete("{code}")]
     public async Task<ActionResult> DeleteCurrency(string code)
     {
-        if(string.IsNullOrEmpty(code)) return BadRequest(_localizer["Code field is required"].Value);
-        var currency = await _context.Currencies.FirstOrDefaultAsync(x => x.Code == code);
+        if (string.IsNullOrEmpty(code)) return BadRequest(_localizer["Code field is required"].Value);
+        var currency = await _repo.GetCurrencyEntityByCode(code);
         if (currency == null) return BadRequest(_localizer["Invalid Code"].Value);
-        _context.Currencies.Remove(currency);
-        var result = await _context.SaveChangesAsync() > 0;
+        _repo.RemoveCurrency(currency);
+        var result = await _repo.SaveChangesAsync();
         if (!result) return BadRequest(_localizer["Database update failed"].Value);
         return Ok();
     }

@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyApi", "CurrencyApi\CurrencyApi.csproj", "{A49C6DBC-CC77-4D34-BB36-3C8000BE49D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyApi.Tests", "CurrencyApi.Tests\CurrencyApi.Tests.csproj", "{8BB9E8D0-A4AC-4C24-BD24-01318BA2B453}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{A49C6DBC-CC77-4D34-BB36-3C8000BE49D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A49C6DBC-CC77-4D34-BB36-3C8000BE49D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A49C6DBC-CC77-4D34-BB36-3C8000BE49D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BB9E8D0-A4AC-4C24-BD24-01318BA2B453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB9E8D0-A4AC-4C24-BD24-01318BA2B453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB9E8D0-A4AC-4C24-BD24-01318BA2B453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB9E8D0-A4AC-4C24-BD24-01318BA2B453}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -20,9 +20,7 @@ builder.Services.AddDbContext<CurrencyDBContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"));
 });
-// DI
-builder.Services.AddHttpClient<CoindeskApiHttpClient>();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+// Localization
 builder.Services.Configure<RequestLocalizationOptions>(opt =>
 {
     var supportedCultures = new[] { new CultureInfo("en-US"), new CultureInfo("zh-TW") };
@@ -30,6 +28,10 @@ builder.Services.Configure<RequestLocalizationOptions>(opt =>
     opt.SupportedCultures = supportedCultures;
     opt.SupportedUICultures = supportedCultures;
 });
+// DI
+builder.Services.AddHttpClient<CoindeskApiHttpClient>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<ICurrencyRepository, CurrencyRepository>();
 
 var app = builder.Build();
 

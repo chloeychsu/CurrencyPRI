@@ -19,7 +19,9 @@ CurrencyPRI 專案使用 ASP.NET Core 8.0 建置.呼叫 Coindesk API 取得相�
 
 ### Prerequisites
 - .NET Core SDK 8.0
-- SQL Server Express LocalDB
+- SQL Server 2022 Express LocalDB
+- Docker
+- Docker Compose
 
 ### Installation
 
@@ -38,4 +40,19 @@ CurrencyPRI 專案使用 ASP.NET Core 8.0 建置.呼叫 Coindesk API 取得相�
     dotnet ef migrations add "InitialCreate" -o Data/Migrations
     dotnet watch
     ```
-4. 
+### API Endpoints
+
+- `GET /api/currencies` - Get all currencies.
+- `GET /api/currencies/{id}` - Get a specific currency by ID.
+- `POST /api/currencies` - Add a new currency.
+- `PUT /api/currencies/{id}` - Update a currency.
+- `DELETE /api/currencies/{id}` - Delete a currency.
+- `GET /api/coindesk` - Get transformed data from Coindesk API.
+
+
+### Unit Tests
+
+Run the unit tests using the following command:
+```bash
+dotnet test
+```
