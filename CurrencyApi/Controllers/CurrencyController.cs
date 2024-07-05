@@ -9,11 +9,11 @@ namespace CurrencyApi;
 [Route("api/currency")]
 public class CurrencyController : ControllerBase
 {
-    private readonly CurrencyRepository _repo;
+    private readonly ICurrencyRepository _repo;
     private readonly IMapper _mapper;
     private readonly IStringLocalizer<CurrencyController> _localizer;
 
-    public CurrencyController(CurrencyRepository repo, IMapper mapper, IStringLocalizer<CurrencyController> localizer)
+    public CurrencyController(ICurrencyRepository repo, IMapper mapper, IStringLocalizer<CurrencyController> localizer)
     {
         _repo = repo;
         _mapper = mapper;
@@ -56,7 +56,7 @@ public class CurrencyController : ControllerBase
     }
 
     [HttpPut("{code}")]
-    public async Task<ActionResult<CurrencyDto>> UpdateCurrency(string code, UpdateCurrencyDto updateCurrency)
+    public async Task<ActionResult> UpdateCurrency(string code, UpdateCurrencyDto updateCurrency)
     {
         if (string.IsNullOrEmpty(code.Trim())) return BadRequest(_localizer["Code field is required"].Value);
         if (!ModelState.IsValid)
