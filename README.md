@@ -2,6 +2,9 @@
 
 CurrencyPRI 專案使用 ASP.NET Core 8.0 建置.呼叫 Coindesk API 取得相關資訊並提供新的 API 來查詢貨幣資訊.
 
+功能簡介 Demo 影片請點擊 [Youtube](https://youtu.be/Sld8uDqmrUI?si=OKZdwlg6fMiyTTyN) 
+
+
 ## 實作功能
 - 從 Coindesk API 獲取幣別資料並轉換為新 API。
 - 幣別資料庫的 CRUD 操作。
@@ -33,7 +36,6 @@ CurrencyPRI 專案使用 ASP.NET Core 8.0 建置.呼叫 Coindesk API 取得相�
     ```
 3. 建置 Docker 容器,安裝請先確保您的本機端已安裝 Docker 和 Docker Compose
     ```bash
-    docker compose build
     docker compose up -d
     ```
 4. Access API
@@ -68,5 +70,3 @@ Run the unit tests using the following command:
 ```bash
 dotnet test
 ```
-
-
